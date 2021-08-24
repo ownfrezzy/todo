@@ -5,7 +5,7 @@ const todoControllers = require("../controllers/todo.controllers");
 router.post("/addTask", async (req, res) => {
   try {
     const result = await todoControllers.addTask(req.body);
-    res.send("New task successfully added");
+    res.send("New task suc1essfully added");
   } catch (e) {
     console.log(e);
   }
