@@ -23,14 +23,14 @@ class todoServices {
 
   deleteTask(body) {
     return new Promise((res, rej) => {
-      const todo = db.collection("todo").deleteOne({ name: body.name });
+      const todo = db.collection("todo").deleteOne({ _id: ObjectId(body.id) });
       res("deleted");
     });
   }
   completeTask(body) {
     return new Promise((res, rej) => {
       const todo = db.collection("todo");
-      todo.updateOne({ name: body.name }, { $set: { active: false } });
+      todo.updateOne({ _id: ObjectId(body.id)}, { $set: { active: false } });
       res("Successfully updated");
     });
   }
