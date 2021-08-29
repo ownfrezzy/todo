@@ -25,7 +25,7 @@ const todoControllers = require("../controllers/todo.controllers");
  */
 /**
  * @swagger
- * /api/todo/:
+ * /api/todo:
  *  get:
  *    summary: Returns all tasks from db
  *    tags:
