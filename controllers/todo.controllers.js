@@ -13,8 +13,8 @@ class todoController {
     const tasks = await todoService.getList();
     return tasks;
   }
-  async completeTask(body) {
-    const result = await todoService.completeTask(body);
+  async updateStatus(body) {
+    const result = await todoService.updateStatus(body);
     return result;
   }
 }

@@ -7,19 +7,7 @@ const PORT = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const swaggerJsDocs = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const swaggerOptions = {
-  swaggerDefinition: {
-    info: {
-      title: "My first API",
-      description: "My API information",
-      contact: {
-        name: "Kiryl",
-      },
-      servers: ["http://localhost:3000", "http://localhost:8080"],
-    },
-  },
-  apis: ["*.js", "./routes/*.js"],
-};
+const swaggerOptions = require("./docs/basicInformation");
 const swaggerDocs = swaggerJsDocs(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -32,13 +20,11 @@ async function start() {
     app.listen(PORT, () => {
       console.log(`Server started PORT ${PORT}`);
     });
-    
   } catch (e) {
     console.log(e);
   }
 }
 app.use(bodyParser.json());
-app.use('/api', routes)
+app.use("/api", routes);
 
-
-start()
+start();
