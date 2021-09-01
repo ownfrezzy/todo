@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon run"
+    "dev": "nodemon run",
+    "start": "nodemon run"
   },
   "author": "Kiryl",
   "license": "ISC",
