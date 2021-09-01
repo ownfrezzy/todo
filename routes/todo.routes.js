@@ -65,7 +65,7 @@ router.get("/", async (req, res) => {
 router.post("/addTask", async (req, res) => {
   try {
     const result = await todoControllers.addTask(req.body);
-    res.send("New task suc1essfully added");
+    res.send(result);
   } catch (e) {
     console.log(e);
   }
