@@ -65,7 +65,7 @@ router.get("/", async (req, res) => {
 router.post("/addTask", async (req, res) => {
   try {
     const result = await todoControllers.addTask(req.body);
-    res.send(result);
+    res.send(todoControllers.getList());
   } catch (e) {
     console.log(e);
   }
@@ -93,7 +93,7 @@ router.post("/addTask", async (req, res) => {
 router.delete("/delete", async (req, res) => {
   try {
     const result = await todoControllers.deleteTask(req.body);
-    res.send(result);
+    res.send(todoControllers.getList());
   } catch (e) {
     console.log(e);
   }

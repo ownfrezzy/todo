@@ -33,16 +33,14 @@ class todoServices {
       todo.find({ _id: ObjectId(body.id) }).toArray((err, result) => {
         if (err) throw err;
         else {
-          result.map((x) =>
-            x.active
-              ? todo.updateOne(
-                  { _id: ObjectId(body.id) },
-                  { $set: { active: false } }
-                )
-              : todo.updateOne(
-                  { _id: ObjectId(body.id) },
-                  { $set: { active: true } }
-                )
+          result.map((x) =>{
+            if (!x.active) {
+              todo.updateOne(
+                { _id: ObjectId(body.id) },
+                { $set: { active: true } }
+              )
+            }
+          }
           );
         }
       });
