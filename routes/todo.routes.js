@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
  * @swagger
  * /api/todo/addTask:
  *  post:
- *    summary: Waiting for a json obj in body to add it as a new task
+ *    summary: Waiting for an obj in body to add it as a new task
  *    tags:
  *     - Todo
  *    parameters:
@@ -75,7 +75,7 @@ router.post("/addTask", async (req, res) => {
  * @swagger
  * /api/todo/delete:
  *  delete:
- *    summary: Delete a task with _id provided by json obj in body
+ *    summary: Delete a task with _id provided by obj in a body
  *    tags:
  *     - Todo
  *    parameters:
@@ -103,7 +103,7 @@ router.delete("/delete", async (req, res) => {
  * @swagger
  * /api/todo/setstatus:
  *  patch:
- *    summary: Change status flag to true/false in task with _id provided by json obj in body
+ *    summary: Change status flag to true/false in task with _id provided by obj in body
  *    tags:
  *     - Todo
  *    parameters:
