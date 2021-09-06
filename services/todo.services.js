@@ -35,10 +35,10 @@ class todoServices {
         { _id: ObjectId(body.id) },
         { $set: { active: !task.active } }
       );
-      const newTask = {};
-      for (let key in task) {
+      const newTask = {...task, active: !task.active};
+/*       for (let key in task) {
         key == 'active' ? newTask[key] = !task[key] : newTask[key] = task[key]
-      }
+      } */
       res(newTask);
     });
   }
