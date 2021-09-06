@@ -45,7 +45,7 @@ router.get("/", async (req, res) => {
 
 /**
  * @swagger
- * /api/todo/addTask:
+ * /api/todo:
  *  post:
  *    summary: Waiting for an obj in body to add it as a new task
  *    tags:
@@ -62,10 +62,11 @@ router.get("/", async (req, res) => {
  *      '200':
  *        description: A successful response
  */
-router.post("/addTask", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const result = await todoControllers.addTask(req.body);
-    res.send(todoControllers.getList());
+    const tasks = await todoControllers.getList();
+    res.send(tasks);
   } catch (e) {
     console.log(e);
   }
@@ -73,7 +74,7 @@ router.post("/addTask", async (req, res) => {
 
 /**
  * @swagger
- * /api/todo/delete:
+ * /api/todo:
  *  delete:
  *    summary: Delete a task with _id provided by obj in a body
  *    tags:
@@ -90,10 +91,11 @@ router.post("/addTask", async (req, res) => {
  *      '200':
  *        description: A successful response
  */
-router.delete("/delete", async (req, res) => {
+router.delete("/", async (req, res) => {
   try {
     const result = await todoControllers.deleteTask(req.body);
-    res.send(todoControllers.getList());
+    const tasks = await todoControllers.getList();
+    res.send(tasks);
   } catch (e) {
     console.log(e);
   }
@@ -101,7 +103,7 @@ router.delete("/delete", async (req, res) => {
 
 /**
  * @swagger
- * /api/todo/setstatus:
+ * /api/todo:
  *  patch:
  *    summary: Change status flag to true/false in task with _id provided by obj in body
  *    tags:
@@ -118,9 +120,14 @@ router.delete("/delete", async (req, res) => {
  *      '200':
  *        description: A successful response
  */
-router.patch("/setstatus", async (req, res) => {
+router.patch("/", async (req, res) => {
   const result = await todoControllers.updateStatus(req.body);
   res.send(result);
 });
+
+router.get('/task/:id', async (req,res) => {
+  const result = await todoControllers.getTaskById(req.params.id);
+  res.send(result)
+})
 
 module.exports = router;

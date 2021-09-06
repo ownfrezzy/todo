@@ -20,34 +20,36 @@ class todoServices {
         });
     });
   }
-
   deleteTask(body) {
     return new Promise((res, rej) => {
       const todo = db.collection("todo").deleteOne({ _id: ObjectId(body.id) });
-      res("deleted");
+      res(todo);
     });
   }
-
   updateStatus(body) {
+    return new Promise(async (res, rej) => {
+      const todo = db.collection("todo");
+      const task = await todo.findOne({ _id: ObjectId(body.id) });
+      todo.updateOne(
+        { _id: ObjectId(body.id) },
+        { $set: { active: !task.active } }
+      );
+      const newTask = {};
+      for (let key in task) {
+        key == 'active' ? newTask[key] = !task[key] : newTask[key] = task[key]
+      }
+      res(newTask);
+    });
+  }
+  getTaskById(body) {
     return new Promise((res, rej) => {
       const todo = db.collection("todo");
-      todo.find({ _id: ObjectId(body.id) }).toArray((err, result) => {
+      todo.find({ _id: ObjectId(body) }).toArray((err, result) => {
         if (err) throw err;
         else {
-          result.map((x) => {
-            x.active
-              ? todo.updateOne(
-                  { _id: ObjectId(body.id) },
-                  { $set: { active: false } }
-                )
-              : todo.updateOne(
-                  { _id: ObjectId(body.id) },
-                  { $set: { active: true } }
-                );
-          });
+          res(result);
         }
       });
-      res("Succesfully updated");
     });
   }
 }
