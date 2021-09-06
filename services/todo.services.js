@@ -4,9 +4,10 @@ const { ObjectId } = require("mongodb");
 
 class todoServices {
   addTask(data) {
-    return new Promise((res, rej) => {
-      const tasks = db.collection("todo");
-      res(tasks.insertOne(data));
+    return new Promise(async (res, rej) => {
+      const tasks = await db.collection("todo").insertOne(data);
+      // const task = await db.collection('todo').findOne({name: data.name})
+      res(tasks);
     });
   }
   getList() {
@@ -23,7 +24,7 @@ class todoServices {
   deleteTask(body) {
     return new Promise((res, rej) => {
       const todo = db.collection("todo").deleteOne({ _id: ObjectId(body.id) });
-      res(todo);
+      res('Successfully deleted');
     });
   }
   updateStatus(body) {
