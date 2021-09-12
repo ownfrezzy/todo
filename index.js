@@ -13,10 +13,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 async function start() {
   try {
-    await mongoose.connect("mongodb+srv://User:User@cluster0.ofryj.mongodb.net/Todo", {
-      useNewUrlParser: true,
-      useFindAndModify: false,
-    }).then(console.log('connected to DB!'));
+    await mongoose
+      .connect("mongodb+srv://User:User@cluster0.ofryj.mongodb.net/Todo", {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+      })
+      .then(console.log("connected to DB!"));
     app.listen(PORT, () => {
       console.log(`Server started PORT ${PORT}`);
     });
@@ -24,6 +26,20 @@ async function start() {
     console.log(e);
   }
 }
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,OPTIONS,POST,PUT,DELETE,PATCH"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
+
 app.use(bodyParser.json());
 app.use("/api", routes);
 
